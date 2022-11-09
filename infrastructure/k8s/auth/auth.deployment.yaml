@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth
+spec:
+  selector:
+    matchLabels:
+      app: auth
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+        - name: auth
+          image: msgxxx/ms-demo-auth:latest
+          resources:
+            limits:
+              memory: '128Mi'
+              cpu: '200m'
+          ports:
+            - containerPort: 80
+              name: default
