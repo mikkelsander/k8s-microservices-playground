@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: auth-db-config
+data:
+  MONGODB_HOST: auth-db-h
+  MONGODB_PORT: '27017'
+  MONGODB_DB: auth_db

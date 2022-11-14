@@ -2,18 +2,22 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: auth
+  namespace: demo
 spec:
   selector:
     matchLabels:
       app: auth
+      version: '1'
   template:
     metadata:
       labels:
         app: auth
+        version: '1'
     spec:
       containers:
         - name: auth
           image: msgxxx/ms-demo-auth:latest
+          imagePullPolicy: Always
           resources:
             limits:
               memory: '128Mi'
@@ -21,3 +25,23 @@ spec:
           ports:
             - containerPort: 80
               name: default
+          env:
+            - name: MONGODB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: auth-db-credentials
+                  key: MONGODB_USER
+                  optional: false
+            - name: MONGODB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: auth-db-credentials
+                  key: MONGODB_PASSWORD
+                  optional: false
+          envFrom:
+            - configMapRef:
+                name: auth-db-config
+            - secretRef:
+                name: jwt-secret
+  strategy:
+    type: Recreate
