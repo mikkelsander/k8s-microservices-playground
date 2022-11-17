@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: ms-demo-dev
+commonLabels:
+  env: dev
+bases:
+  - ../../base
+configMapGenerator:
+  - name: auth-db-config
+    envs:
+      - .env.dev.auth-db-config
+secretGenerator:
+  - name: auth-db-credentials
+    envs:
+      - .env.dev.auth-db-credentials
+  - name: jwt-secret
+    envs:
+      - .env.dev.jwt-secret

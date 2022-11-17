@@ -2,28 +2,26 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: auth
-  namespace: demo
 spec:
   selector:
     matchLabels:
-      app: auth
+      pod: auth
       version: '1'
   template:
     metadata:
       labels:
-        app: auth
+        pod: auth
         version: '1'
     spec:
       containers:
         - name: auth
-          image: msgxxx/ms-demo-auth:latest
-          imagePullPolicy: Always
+          image: msgxxx/ms-demo-auth
           resources:
             limits:
-              memory: '128Mi'
-              cpu: '200m'
+              memory: 1Gi
+              cpu: 1
           ports:
-            - containerPort: 80
+            - containerPort: 3000
               name: default
           env:
             - name: MONGODB_USER

@@ -1,0 +1,31 @@
+apiVersion: skaffold/v3
+kind: Config
+manifests:
+  kustomize:
+    paths:
+      - ./k8s/overlays/development/.
+build:
+  local:
+    push: false
+  artifacts:
+    - image: msgxxx/ms-demo-auth
+      context: .
+      docker:
+        dockerfile: Dockerfile.dev
+      sync:
+        infer:
+          - 'src/**/*.*'
+        # manual:
+        #   # Sync all the TypeScript files that are in the src folder
+        #   # with the container src folder
+        #   - src: 'src/**/*.ts'
+        #     dest: .
+portForward:
+  - resourceType: service
+    resourceName: auth
+    port: 80
+    localPort: 3000
+  - resourceType: service
+    resourceName: auth-db-h
+    port: 27017
+    localPort: 27017
