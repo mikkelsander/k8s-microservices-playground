@@ -17,7 +17,6 @@ export class User {
   salt: string;
 
   id: string;
-  validatePassword: Function;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
@@ -41,32 +40,3 @@ UserSchema.set('toJSON', {
     delete ret.salt;
   },
 });
-
-/**
- * Presave hook
- * Generates a random salt and computes a hash value for the provided password before committing to the database
- */
-UserSchema.pre<User>('save', async function () {
-  const salt = crypto.randomBytes(16).toString('hex');
-  const hashedPassword = crypto
-    .pbkdf2Sync(this.password, salt, 1000, 64, `sha512`)
-    .toString(`hex`);
-
-  this.password = hashedPassword;
-  this.salt = salt;
-});
-
-/**
- * Compares the provided password with the hashed password in the database
- * @param providedPassword
- * @returns boolean
- */
-UserSchema.methods.validatePassword = function (
-  providedPassword: string,
-): boolean {
-  const hashedPassword = crypto
-    .pbkdf2Sync(providedPassword, this.salt, 1000, 64, `sha512`)
-    .toString(`hex`);
-
-  return hashedPassword === this.password;
-};

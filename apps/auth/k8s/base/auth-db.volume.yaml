@@ -10,4 +10,5 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   hostPath:
-    path: /data/ms-demo/auth-db
+    path: /mnt/ms-demo/auth-db
+    type: DirectoryOrCreate
