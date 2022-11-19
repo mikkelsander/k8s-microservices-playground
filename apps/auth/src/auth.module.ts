@@ -2,26 +2,24 @@ import { Module } from '@nestjs/common';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { MongooseModule } from '@nestjs/mongoose';
-import { User, UserSchema } from './db/schemas/user.schema';
+import { User, UserSchema } from './schemas/user.schema';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { MongoDbConfigService } from './db/config/mongodb-config.service';
+import { MongoDbConfigService } from './config/mongodb-config.service';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule, JwtService } from '@nestjs/jwt';
-import { LocalStrategy } from './guards/local.guard';
 import { JwtStrategy } from './guards/jwt.guard';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      // envFilePath: '../.env.local',
     }),
     MongooseModule.forRootAsync({
       useClass: MongoDbConfigService,
     }),
-
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
     PassportModule,
-
     JwtModule.registerAsync({
       useFactory: async (configService: ConfigService) => ({
         secret: configService.get<string>('JWT_SECRET'),
@@ -31,6 +29,6 @@ import { JwtStrategy } from './guards/jwt.guard';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService, LocalStrategy, JwtStrategy],
+  providers: [AuthService, JwtStrategy],
 })
 export class AuthModule {}
