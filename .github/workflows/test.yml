@@ -9,7 +9,6 @@ on:
  #     - apps/auth/**    
       
 jobs:
-
   build:
 
     runs-on: ubuntu-latest
@@ -29,7 +28,8 @@ jobs:
 
     -
       name: Build docker image
-      run: docker build ./apps/auth -f ./apps/auth/Dockerfile.dev -t msgxxx/ms-demo-auth:${{ github.sha }}
+      working-directory: ./apps/auth
+      run: docker build . -f Dockerfile.dev -t msgxxx/ms-demo-auth:${{ github.sha }}
     
     
     -
