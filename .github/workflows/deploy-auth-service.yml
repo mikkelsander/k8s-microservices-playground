@@ -18,7 +18,13 @@ jobs:
     -
       name: Checkout source code
       uses: actions/checkout@v3
-
+      
+    -
+      name: Run in-memory integration tests
+      uses: docker/build-push-action@v3
+      with:
+        context: ./apps/auth
+        file: ./apps/auth/Dockerfile.test
 
     -
       name: Docker meta
@@ -31,9 +37,6 @@ jobs:
           
         # generate Docker tags based on the following events/attributes
         tags: |
-          type=schedule
-          type=ref,event=branch
-          type=ref,event=pr
           type=sha
       
       
@@ -54,8 +57,8 @@ jobs:
       name: Build and push
       uses: docker/build-push-action@v3
       with:
-        context: /apps/auth/.
-        file: ./Dockerfile.dev
+        context: ./apps/auth
+        file: ./apps/auth/Dockerfile.dev
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         
