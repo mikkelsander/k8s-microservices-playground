@@ -52,7 +52,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         context: ./apps/auth
-        file: .apps/auth/Dockerfile.dev
+        file: ./apps/auth/Dockerfile.dev
         push: true
         tags: ${{ steps.meta.outputs.tags }}
         
