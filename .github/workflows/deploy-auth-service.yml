@@ -18,7 +18,13 @@ jobs:
     -
       name: Checkout source code
       uses: actions/checkout@v3
-
+      
+    -
+      name: Run in-memory integration tests
+      uses: docker/build-push-action@v3
+      with:
+        context: ./apps/auth
+        file: ./apps/auth/Dockerfile.test
 
     -
       name: Docker meta
