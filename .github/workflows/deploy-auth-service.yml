@@ -54,7 +54,7 @@ jobs:
       name: Build and push
       uses: docker/build-push-action@v3
       with:
-        context: ./apps/auth/.
+        context: /apps/auth/.
         file: ./Dockerfile.dev
         push: true
         tags: ${{ steps.meta.outputs.tags }}
