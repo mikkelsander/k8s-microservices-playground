@@ -34,4 +34,4 @@ jobs:
     
     -
       name: Push docker image
-      run: docker push msgxxx/ms-demo-auth:${{ GITHUB_SHA }}
+      run: docker push msgxxx/ms-demo-auth:${{ github.sha }}
