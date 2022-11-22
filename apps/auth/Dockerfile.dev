@@ -10,9 +10,6 @@ RUN npm ci
 
 COPY --chown=node:node . ./
 
-# run unit tests
-RUN npm run test
-
 USER node
 
 CMD [ "npm", "run", "start:dev" ]

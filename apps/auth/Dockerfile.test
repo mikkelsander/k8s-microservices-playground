@@ -1,5 +1,5 @@
 # Unfortunately we cannot use node:alpine with mongodb in-memory server - https://nodkz.github.io/mongodb-memory-server/docs/guides/known-issues/#no-build-available-for-alpine-linux
-# So this image exists purely to be able to run e2e tests in CI pipeline
+# So this image exists purely to be able to run the e2e tests in the CI pipeline
 FROM node:18
 
 COPY package*.json ./
@@ -8,4 +8,5 @@ RUN npm ci
 
 COPY . ./
 
+RUN npm test
 RUN npm run test:e2e
