@@ -35,6 +35,6 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         context: .
-        file: ./Dockerfile
+        file: ./Dockerfile.dev
         push: true
-        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/ms-demo-auth:$GITHUB_SHA-${{ date +%s }}
+        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/ms-demo-auth:$GITHUB_SHA_$(date +%s)
