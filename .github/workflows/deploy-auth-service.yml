@@ -2,14 +2,13 @@ name: Build and deploy Auth service
 
 on:
   push:
-    branches: [ "master" ]
+    branches: ['master']
     paths:
       - apps/auth/**
-      
+
   workflow_dispatch:
 
 jobs:
-
   build:
     runs-on: ubuntu-latest
     steps:
@@ -41,6 +40,5 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: ./apps/auth
-          file: ./apps/auth/Dockerfile.prod
           push: true
           tags: ${{ steps.meta.outputs.tags }}
