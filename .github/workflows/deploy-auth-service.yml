@@ -40,7 +40,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: .
-          file: ./Dockerfile.prod
+          context: ./apps/auth
+          file: ./apps/auth/Dockerfile.prod
           push: true
           tags: ${{ steps.meta.outputs.tags }}
