@@ -1,6 +1,8 @@
-Dockerfile
+Dockerfile*
 .dockerignore
 node_modules
 npm-debug.log
 dist
 .env
+skaffold
+k8s

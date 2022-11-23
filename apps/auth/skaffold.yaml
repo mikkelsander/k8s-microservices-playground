@@ -15,11 +15,6 @@ build:
       sync:
         infer:
           - 'src/**/*.*'
-        # manual:
-        #   # Sync all the TypeScript files that are in the src folder
-        #   # with the container src folder
-        #   - src: 'src/**/*.ts'
-        #     dest: .
 portForward:
   - resourceType: service
     resourceName: auth
