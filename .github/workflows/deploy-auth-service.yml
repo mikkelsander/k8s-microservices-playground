@@ -1,20 +1,17 @@
 name: Build and deploy Auth service
 
 on:
-  workflow_dispatch
-
-  # push:
-  #   branches: [ "master" ]
-  #   paths:
-  #     - apps/auth/**
+  push:
+    branches: [ "master" ]
+    paths:
+      - apps/auth/**
+      
+  workflow_dispatch:
 
 jobs:
-  test:
-    uses: ./.github/workflows/test-auth-service.yml
 
   build:
     runs-on: ubuntu-latest
-    needs: test
     steps:
       - name: Checkout source code
         uses: actions/checkout@v3
@@ -43,7 +40,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v3
         with:
-          context: ./apps/auth
-          file: ./apps/auth/Dockerfile.dev
+          context: .
+          file: ./Dockerfile.prod
           push: true
           tags: ${{ steps.meta.outputs.tags }}
