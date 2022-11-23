@@ -78,7 +78,7 @@ describe('AuthController (e2e) with in-memory mongo db', () => {
       await request(app.getHttpServer())
         .get('/ping')
         .expect(200)
-        .expect('not pong');
+        .expect('pong');
     });
   });
 
