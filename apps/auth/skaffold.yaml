@@ -11,7 +11,7 @@ build:
     - image: msgxxx/ms-demo-auth
       context: .
       docker:
-        dockerfile: Dockerfile.dev
+        dockerfile: Dockerfile.local
       sync:
         infer:
           - 'src/**/*.*'
