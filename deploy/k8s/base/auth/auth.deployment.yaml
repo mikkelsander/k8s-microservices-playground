@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: auth
-          image: msgxxx/ms-demo-auth
+          image: auth-image
           resources:
             limits:
               memory: 1Gi
