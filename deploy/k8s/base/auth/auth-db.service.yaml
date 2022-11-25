@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: auth-db-h
+spec:
+  clusterIP: None
+  selector:
+    app: auth-db
+    version: '1'
+  ports:
+    - port: 27017
+      targetPort: 27017
