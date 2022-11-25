@@ -6,14 +6,10 @@ commonLabels:
   env: prod
 bases:
   - ../../base
-configMapGenerator:
-  - name: auth-db-config
-    envs:
-      - .env.prod.auth-db-config
 secretGenerator:
   - name: auth-db-credentials
     envs:
-      - .env.prod.auth-db-credentials
+      - .env.auth-db-credentials
   - name: jwt-secret
     envs:
-      - .env.prod.jwt-secret
+      - .env.jwt-secret
