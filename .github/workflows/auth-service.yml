@@ -1,0 +1,33 @@
+name: Build and deploy the auth service
+
+on:
+  push:
+    branches: ['master', 'dev']
+    paths:
+      - apps/auth/**
+  pull_request:
+    branches: ['master', 'dev']
+    paths:
+      - apps/auth/**
+
+  workflow_dispatch:
+
+jobs:
+  build-image:
+    uses: ./.github/workflows/build-image.yml
+    with:
+      image_repo: ms-demo-auth
+      docker_context: ./apps/auth
+      push_to_registry: true
+      docker_hub_username: msgxxx
+    secrets:
+      docker_hub_access_token: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+  deploy-image:
+    uses: ./.github/workflows/deploy-image.yml
+    needs: build-image
+    if: ${{ github.event_name != 'pull_request' }}
+    with:
+      image_tag: ${{ needs.build-image.outputs.image_tag }}
+      image_placeholder: auth-image
+      app_name: auth-service

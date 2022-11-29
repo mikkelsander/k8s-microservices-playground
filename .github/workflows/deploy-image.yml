@@ -1,0 +1,55 @@
+name: 'Deploy image to cluster'
+
+on:
+  workflow_call:
+    inputs:
+      image_tag:
+        required: true
+        type: string
+      image_placeholder:
+        required: true
+        type: string
+      app_name:
+        required: true
+        type: string
+
+jobs:
+  replace-image-in-cluster:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: Set up kustomize
+        uses: imranismail/setup-kustomize@v2
+
+      - name: Set cluster_env environment variable
+        run: |
+          branch=${{ github.ref_name }}
+
+          if [ "$branch" == "master" ]; then
+            cluster_env=prod
+          elif [ "$branch" == "dev" ]; then
+            cluster_env=dev
+          else
+            exit 1
+          fi
+
+          echo "cluster_env=${cluster_env}" >> $GITHUB_ENV
+
+      - name: Edit kustomization overlay manifest with updated image tag
+        run: |
+          cd deploy/k8s/overlays/${{ env.cluster_env }}
+          kustomize edit set image ${{ inputs.image_placeholder }}=${{ inputs.image_tag }}
+
+      - name: Commit changes
+        run: |
+          git add .
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "Update '${{ inputs.app_name }}' image on '${{ env.cluster_env }}' cluster"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          branch: 'master'
