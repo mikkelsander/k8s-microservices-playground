@@ -4,12 +4,16 @@ namespace: ms-demo-prod
 nameSuffix: -prod
 commonLabels:
   env: prod
-bases:
-  - ../../base
 secretGenerator:
-  - name: auth-db-credentials
-    envs:
-      - .env.auth-db-credentials
-  - name: jwt-secret
-    envs:
-      - .env.jwt-secret
+- envs:
+  - .env.auth-db-credentials
+  name: auth-db-credentials
+- envs:
+  - .env.jwt-secret
+  name: jwt-secret
+resources:
+- ../../base
+images:
+- name: auth-image
+  newName: msgxxx/ms-demo-auth
+  newTag: branch-master-c96d81b6
