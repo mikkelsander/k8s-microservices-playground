@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth
+  name: products
 spec:
   selector:
-    pod: auth
+    pod: products
     version: '1'
   ports:
     - port: 80

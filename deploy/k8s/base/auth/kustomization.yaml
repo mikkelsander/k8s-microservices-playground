@@ -3,10 +3,6 @@ kind: Kustomization
 commonAnnotations:
   owner: mikkel
   email: bla@bla.com
-configMapGenerator:
-  - name: auth-db-config
-    envs:
-      - .env.auth-db-config
 resources:
   - auth-db.volume.yaml
   - auth-db.claim.yaml

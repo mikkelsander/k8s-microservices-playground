@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+commonAnnotations:
+  owner: mikkel
+  email: bla@bla.com
+resources:
+  - products-db.volume.yaml
+  - products-db.claim.yaml
+  - products-db.service.yaml
+  - products-db.statefulset.yaml
+  - products.service.yaml
+  - products.deployment.yaml

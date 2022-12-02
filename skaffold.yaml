@@ -1,0 +1,45 @@
+apiVersion: skaffold/v3
+kind: Config
+manifests:
+  kustomize:
+    paths:
+      - ./deploy/k8s/overlays/local/.
+build:
+  local:
+    push: false
+  artifacts:
+    - image: msgxxx/ms-demo-auth
+      context: ./apps/auth/.
+      docker:
+        dockerfile: Dockerfile.local
+      sync:
+        infer:
+          - src/**/*.*
+
+    - image: msgxxx/ms-demo-products
+      context: ./apps/products/.
+      docker:
+        dockerfile: Dockerfile.local
+      sync:
+        infer:
+          - src/**/*.*
+portForward:
+  - resourceType: service
+    resourceName: auth-local
+    port: 80
+    localPort: 3000
+
+  - resourceType: service
+    resourceName: auth-db-h-local
+    port: 27017
+    localPort: 27017
+
+  - resourceType: service
+    resourceName: products-local
+    port: 80
+    localPort: 3000
+
+  - resourceType: service
+    resourceName: products-db-h-local
+    port: 5432
+    localPort: 5432

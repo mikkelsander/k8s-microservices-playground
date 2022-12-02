@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-db-h
+  name: products-db-h
 spec:
   clusterIP: None
   selector:
-    app: auth-db
+    pod: products-db
     version: '1'
   ports:
-    - port: 27017
-      targetPort: 27017
+    - port: 5432
+      targetPort: 5432

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: auth-db-volume
+  name: products-db-volume
 spec:
   capacity:
     storage: 200Mi
@@ -10,5 +10,5 @@ spec:
     - ReadWriteMany
   persistentVolumeReclaimPolicy: Retain
   hostPath:
-    path: /mnt/ms-demo/auth-db
+    path: /mnt/ms-demo/products-db
     type: DirectoryOrCreate

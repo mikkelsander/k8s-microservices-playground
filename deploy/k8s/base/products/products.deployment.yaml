@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: products
+spec:
+  selector:
+    matchLabels:
+      pod: products
+      version: '1'
+  template:
+    metadata:
+      labels:
+        pod: products
+        version: '1'
+    spec:
+      containers:
+        - name: products
+          image: products-image
+          resources:
+            limits:
+              memory: 1Gi
+              cpu: 1
+          ports:
+            - containerPort: 3000
+              name: default
+          envFrom:
+            - configMapRef:
+                name: products-db-config
+            - secretRef:
+                name: products-db-credentials
+  strategy:
+    type: Recreate

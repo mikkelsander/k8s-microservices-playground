@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: products-db
+spec:
+  selector:
+    matchLabels:
+      pod: products-db
+      version: '1'
+  serviceName: products-db-h
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        pod: products-db
+        version: '1'
+    spec:
+      containers:
+        - name: products-db
+          image: postgres:15.1
+          ports:
+            - containerPort: 5432
+              name: default
+          volumeMounts:
+            - name: data
+              mountPath: /var/lib/postgresql/data
+          env:
+            # - name: POSTGRES_DB
+            #   value: products
+
+            - name: POSTGRES_DB
+              valueFrom:
+                configMapKeyRef:
+                  name: products-db-config
+                  key: POSTGRES_DB
+                  optional: false
+          envFrom:
+            - secretRef:
+                name: products-db-credentials
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: products-db-claim
