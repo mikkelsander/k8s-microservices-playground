@@ -5,22 +5,22 @@ nameSuffix: -prod
 commonLabels:
   env: prod
 configMapGenerator:
-  - name: auth-db-config
-    envs:
-      - .env.auth-db-config
-  - name: products-db-config
-    envs:
-      - .env.products-db-config
+- envs:
+  - .env.auth-db-config
+  name: auth-db-config
+- envs:
+  - .env.products-db-config
+  name: products-db-config
 secretGenerator:
-  - envs:
-      - .env.auth-db-credentials
-    name: auth-db-credentials
-  - envs:
-      - .env.jwt-secret
-    name: jwt-secret
+- envs:
+  - .env.auth-db-credentials
+  name: auth-db-credentials
+- envs:
+  - .env.jwt-secret
+  name: jwt-secret
 resources:
-  - ../../base
+- ../../base
 images:
-  - name: auth-image
-    newName: msgxxx/ms-demo-auth
-    newTag: branch-master-c96d81b6
+- name: auth-image
+  newName: msgxxx/ms-demo-auth
+  newTag: branch-master-fc178c34
