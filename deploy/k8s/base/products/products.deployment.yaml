@@ -13,13 +13,20 @@ spec:
         pod: products
         version: '1'
     spec:
+      serviceAccountName: products
+      initContainers:
+        - name: wait-for-products-db-migrate-job
+          image: groundnuty/k8s-wait-for:v2.0
+          args:
+            - job
+            - products-db-migrate
       containers:
         - name: products
-          image: products-image
+          image: products-image-placeholder
           resources:
             limits:
-              memory: 1Gi
-              cpu: 1
+              memory: 500Mi
+              cpu: '0.2'
           ports:
             - containerPort: 3000
               name: default
@@ -28,5 +35,16 @@ spec:
                 name: products-db-config
             - secretRef:
                 name: products-db-credentials
-  strategy:
-    type: Recreate
+
+          # readinessProbe:
+          #   httpGet:
+          #     path: /ready
+          #     port: 3000
+          #   initialDelaySeconds: 2
+          #   periodSeconds: 5
+          # livenessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 3000
+          #   initialDelaySeconds: 2
+          #   periodSeconds: 5

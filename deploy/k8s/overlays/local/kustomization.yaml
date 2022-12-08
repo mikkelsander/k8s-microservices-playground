@@ -1,7 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: ms-demo-local
-nameSuffix: -local
 commonLabels:
   env: local
 bases:
@@ -27,9 +26,9 @@ secretGenerator:
       - .env.jwt-secret
 
 images:
-  - name: auth-image
+  - name: auth-image-placeholder
     newName: msgxxx/ms-demo-auth
     newTag: latest
-  - name: products-image
+  - name: products-image-placeholder
     newName: msgxxx/ms-demo-products
     newTag: latest

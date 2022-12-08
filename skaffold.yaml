@@ -25,21 +25,21 @@ build:
           - src/**/*.*
 portForward:
   - resourceType: service
-    resourceName: auth-local
+    resourceName: auth
     port: 80
-    localPort: 3000
+    localPort: 5000
 
   - resourceType: service
-    resourceName: auth-db-h-local
+    resourceName: auth-db-h
     port: 27017
     localPort: 27017
 
   - resourceType: service
-    resourceName: products-local
+    resourceName: products
     port: 80
-    localPort: 3000
+    localPort: 5001
 
   - resourceType: service
-    resourceName: products-db-h-local
+    resourceName: products-db-h
     port: 5432
     localPort: 5432

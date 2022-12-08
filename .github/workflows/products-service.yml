@@ -4,11 +4,11 @@ on:
   push:
     branches: ['master', 'dev']
     paths:
-      - apps/auth/**
+      - apps/products/**
   pull_request:
     branches: ['master', 'dev']
     paths:
-      - apps/auth/**
+      - apps/products/**
 
   workflow_dispatch:
 
@@ -16,8 +16,8 @@ jobs:
   build-image:
     uses: ./.github/workflows/build-image.yml
     with:
-      image_repo: ms-demo-auth
-      docker_context: ./apps/auth
+      image_repo: ms-demo-products
+      docker_context: ./apps/products
       push_to_registry: true
       docker_hub_username: msgxxx
     secrets:
@@ -29,5 +29,5 @@ jobs:
     if: ${{ github.event_name != 'pull_request' }}
     with:
       image_tag: ${{ needs.build-image.outputs.image_tag }}
-      image_placeholder: auth-image-placeholder
-      app_name: auth-service
+      image_placeholder: products-image-placeholder
+      app_name: products-service

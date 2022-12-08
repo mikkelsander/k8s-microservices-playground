@@ -8,5 +8,7 @@ resources:
   - products-db.claim.yaml
   - products-db.service.yaml
   - products-db.statefulset.yaml
+  - products-db-migrate.job.yaml
   - products.service.yaml
   - products.deployment.yaml
+  - products.serviceaccount.yaml

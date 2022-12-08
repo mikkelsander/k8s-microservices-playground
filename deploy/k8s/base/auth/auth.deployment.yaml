@@ -15,11 +15,11 @@ spec:
     spec:
       containers:
         - name: auth
-          image: auth-image
+          image: auth-image-placeholder
           resources:
             limits:
-              memory: 1Gi
-              cpu: 1
+              memory: 500Mi
+              cpu: '0.2'
           ports:
             - containerPort: 3000
               name: default
@@ -41,5 +41,16 @@ spec:
                 name: auth-db-config
             - secretRef:
                 name: jwt-secret
-  strategy:
-    type: Recreate
+
+          # readinessProbe:
+          #   httpGet:
+          #     path: /ready
+          #     port: 3000
+          #   initialDelaySeconds: 2
+          #   periodSeconds: 5
+          # livenessProbe:
+          #   httpGet:
+          #     path: /healthz
+          #     port: 3000
+          #   initialDelaySeconds: 2
+          #   periodSeconds: 5

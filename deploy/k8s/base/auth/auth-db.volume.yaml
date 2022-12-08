@@ -7,8 +7,19 @@ spec:
     storage: 200Mi
   volumeMode: Filesystem
   accessModes:
-    - ReadWriteMany
-  persistentVolumeReclaimPolicy: Retain
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: manual
   hostPath:
-    path: /mnt/ms-demo/auth-db
+    path: /tmp/data/auth-db
     type: DirectoryOrCreate
+  # local:
+  #   path: /Volumes/ms-demo/auth-db
+  # nodeAffinity:
+  #   required:
+  #     nodeSelectorTerms:
+  #       - matchExpressions:
+  #           - key: kubernetes.io/hostname
+  #             operator: In
+  #             values:
+  #               - docker-desktop

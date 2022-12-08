@@ -25,9 +25,6 @@ spec:
             - name: data
               mountPath: /var/lib/postgresql/data
           env:
-            # - name: POSTGRES_DB
-            #   value: products
-
             - name: POSTGRES_DB
               valueFrom:
                 configMapKeyRef:
@@ -37,6 +34,14 @@ spec:
           envFrom:
             - secretRef:
                 name: products-db-credentials
+          readinessProbe:
+            exec:
+              command:
+                ['pg_isready', '-U', '$(POSTGRES_USER)', '-d', '$(POSTGRES_DB)']
+            initialDelaySeconds: 2
+            periodSeconds: 5
+            timeoutSeconds: 2
+
       volumes:
         - name: data
           persistentVolumeClaim:

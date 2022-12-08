@@ -37,6 +37,12 @@ spec:
                   name: auth-db-credentials
                   key: MONGODB_PASSWORD
                   optional: false
+          readinessProbe:
+            exec:
+              command: ['mongosh', '--eval', 'db.adminCommand({ ping: 1 })']
+            initialDelaySeconds: 2
+            periodSeconds: 5
+            timeoutSeconds: 2
       volumes:
         - name: data
           persistentVolumeClaim:

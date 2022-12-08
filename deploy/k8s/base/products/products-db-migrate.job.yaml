@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: products-db-migrate
+spec:
+  backoffLimit: 1
+  ttlSecondsAfterFinished: 100
+  template:
+    spec:
+      serviceAccountName: products
+      initContainers:
+        - name: wait-for-products-db-service
+          image: groundnuty/k8s-wait-for:v2.0
+          args:
+            - service
+            - products-db-h
+
+      containers:
+        - name: migrate-db
+          image: products-image-placeholder
+          command: ['npm']
+          args: ['run', 'migrate', 'up']
+          envFrom:
+            - configMapRef:
+                name: products-db-config
+            - secretRef:
+                name: products-db-credentials
+      restartPolicy: Never
