@@ -4,22 +4,25 @@ namespace: ms-demo-prod
 commonLabels:
   env: prod
 configMapGenerator:
-  - envs:
-      - .env.auth-db-config
-    name: auth-db-config
-  - envs:
-      - .env.products-db-config
-    name: products-db-config
+- envs:
+  - .env.auth-db-config
+  name: auth-db-config
+- envs:
+  - .env.products-db-config
+  name: products-db-config
 secretGenerator:
-  - envs:
-      - .env.auth-db-credentials
-    name: auth-db-credentials
-  - envs:
-      - .env.jwt-secret
-    name: jwt-secret
+- envs:
+  - .env.auth-db-credentials
+  name: auth-db-credentials
+- envs:
+  - .env.jwt-secret
+  name: jwt-secret
 resources:
-  - ../../base
+- ../../base
 images:
-  - name: auth-image-placeholder
-    newName: msgxxx/ms-demo-auth
-    newTag: branch-master-fc178c34
+- name: auth-image-placeholder
+  newName: msgxxx/ms-demo-auth
+  newTag: branch-master-fc178c34
+- name: products-image-placeholder
+  newName: msgxxx/ms-demo-products
+  newTag: branch-master-4a1b0185
