@@ -4,8 +4,7 @@ commonAnnotations:
   owner: mikkel
   email: bla@bla.com
 resources:
-  - auth-db.volume.yaml
-  - auth-db.claim.yaml
+  - auth-db.pvc.yaml
   - auth-db.service.yaml
   - auth-db.statefulset.yaml
   - auth.service.yaml

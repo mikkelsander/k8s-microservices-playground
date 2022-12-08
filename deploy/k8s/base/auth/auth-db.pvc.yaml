@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: auth-db-claim
+spec:
+  resources:
+    requests:
+      storage: 200Mi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  # 'hostpath' is the default storage class of docker desktop
+  # docker desktop will dynamically create persistent volume storage in the docker desktop VM when using this class
+  storageClassName: hostpath
