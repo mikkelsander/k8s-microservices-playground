@@ -1,5 +1,8 @@
+import sql from './db';
+
 export const getProducts = async () => {
-  return ['product1 ', 'pridcut2'];
+  const products = await sql<any[]>`SELECT * FROM products`;
+  return products;
 };
 
 export const createProduct = async () => {

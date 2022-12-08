@@ -1,6 +1,6 @@
 import express, { Router } from 'express';
 
-import { getProducts } from './product.service';
+import { getProducts } from './service';
 
 const router: Router = express.Router();
 
