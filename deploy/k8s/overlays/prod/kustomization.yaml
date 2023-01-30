@@ -25,4 +25,4 @@ images:
   newTag: branch-master-fd8f9504
 - name: products-image-placeholder
   newName: msgxxx/ms-demo-products
-  newTag: branch-master-bc58b47b
+  newTag: branch-master-ce4be052
