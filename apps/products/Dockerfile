@@ -24,4 +24,4 @@ RUN npm ci --omit=dev
 
 USER node
 
-CMD [ "node", "dist/main.js" ]
+CMD [ "node", "dist/server.js" ]

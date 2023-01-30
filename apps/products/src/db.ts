@@ -6,6 +6,7 @@ const sql = postgres({
   port: Number(process.env.POSTGRES_PORT),
   user: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
+  transform: postgres.camel,
 });
 
 export default sql;
