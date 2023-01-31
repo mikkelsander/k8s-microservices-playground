@@ -1,6 +1,6 @@
 # k8s-microservices-playground
 
-This mono repo was created as a play and testing gound for me to play around with some new tools and patterns.
+This monorepo was created as a testing gound for me to play around with some new tools and patterns.
 
 The current goal of this repo is to create a collection of asynchronous microservices running on Kubernetes.
 
@@ -30,7 +30,7 @@ After a new image has been pushed, the new image tag will replace the old image 
 
 ArgoCD has been configured to detect changes in the Kustomize overlay files. ArgoCD will then automatically synchronize the Kubernetes cluster(s) to match the changed manifests.
 
-Currently I'm just deploying to different namespaces on my local Kubernetes cluster to simulate different enviroments.
+Currently I'm just deploying to different namespaces on my local Kubernetes cluster to simulate different environments.
 
 (The Kubernetes manifests for the ArgoCD operator will be added to the project in the future, but for now you will have to set that up manually if you want ArgoCD enabled)
 
