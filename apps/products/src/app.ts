@@ -1,7 +1,7 @@
 import express, { Application, NextFunction, Request, Response } from 'express';
 import productRoutes from './routes/products';
 import categoryRoutes from './routes/categories';
-import { logRequest } from './middleware/request-loging';
+import { logRequest } from './middleware/request-logging';
 
 const app: Application = express();
 app.use(express.json());
