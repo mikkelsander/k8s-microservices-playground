@@ -22,7 +22,7 @@ resources:
 images:
 - name: auth-image-placeholder
   newName: msgxxx/ms-demo-auth
-  newTag: branch-master-fd8f9504
+  newTag: branch-master-bc3000ec
 - name: products-image-placeholder
   newName: msgxxx/ms-demo-products
   newTag: branch-master-0a9d6f39
